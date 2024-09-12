@@ -1,21 +1,18 @@
-import { Entity } from "../abstract";
-
 type RgProps = {
   value: string;
   emissionDate: Date;
 };
-export class Rg extends Entity<RgProps> {
-  private _value:string
-  private _emissionDate:Date
-  private constructor(props: RgProps, _id?: string) {
-    super(props, _id);
-    this._value = props.value
-    this._emissionDate = props.emissionDate
+export class Rg  {
+  private value: string
+  private emissionDate:Date
+  constructor(props:RgProps){
+    props.value = this.value
+    props.emissionDate = this.emissionDate
   }
   public get getValue():string{
-    return this._value
+    return this.value
   }
   public get getEmissionDate():Date{
-    return this._emissionDate
+    return this.emissionDate
   }
 }
