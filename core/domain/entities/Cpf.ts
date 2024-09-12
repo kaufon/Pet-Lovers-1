@@ -1,22 +1,19 @@
-import { Entity } from "../abstract";
 
 type CpfProps = {
   value: string;
   emissionDate: Date;
 };
-export class Cpf extends Entity<CpfProps> {
-  private _value:string
-  private _emissionDate:Date
-  private constructor(props: CpfProps, _id?: string) {
-    super(props, _id);
-    this._value = props.value
-    this._emissionDate = props.emissionDate
+export class Cpf  {
+  private value: string
+  private emissionDate:Date
+  constructor(props:CpfProps){
+    props.value = this.value
+    props.emissionDate = this.emissionDate
   }
   public get getValue():string{
-    return this._value
+    return this.value
   }
   public get getEmissionDate():Date{
-    return this._emissionDate
+    return this.emissionDate
   }
 }
-
