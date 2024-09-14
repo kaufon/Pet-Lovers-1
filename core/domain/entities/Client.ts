@@ -9,12 +9,12 @@ type ClientProps = {
   nome: string;
   nomeSocial: string;
   cpf: Cpf;
-  rgs: Rg[];
-  registerDate: Date;
-  cellphones: Cellphone[];
-  consumedProducts: Product[];
-  consumedServices: Service[];
-  pets: Pets[];
+  rgs?: Rg[];
+  registerDate?: Date;
+  cellphones?: Cellphone[];
+  consumedProducts?: Product[];
+  consumedServices?: Service[];
+  pets?: Pets[];
 };
 export class Client {
   public nome: string;
@@ -30,12 +30,12 @@ export class Client {
     props.cpf = this._cpf;
     props.nome = this.nome;
     props.nomeSocial = this.nomeSocial;
-    props.rgs = this._rgs;
-    props.registerDate = this._registerDate;
-    props.cellphones = this._cellphones;
-    props.consumedServices = this._consumedServices;
-    props.consumedProducts = this._consumedProducts;
-    props.pets = this._pets;
+    props.rgs = this._rgs ?? [];
+    props.registerDate = new Date();
+    props.cellphones = this._cellphones ?? [];
+    props.consumedServices = this._consumedServices ?? [];
+    props.consumedProducts = this._consumedProducts ?? [];
+    props.pets = this._pets ?? [];
   }
   public get getCpf(): Cpf {
     return this._cpf;
