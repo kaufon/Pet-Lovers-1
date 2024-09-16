@@ -10,10 +10,10 @@ export class Pets {
   private _race: string
   private _gender: string
   constructor(props:PetsProps){
-    props._type = this._type
-    props._gender = this._gender
-    props._race = this._race
-    props._name = this._name
+    this._name = props._name
+    this._type = props._type
+    this._race = props._race
+    this._gender = props._gender
   }
   public get getName():string{
     return this._name

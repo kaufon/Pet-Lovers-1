@@ -13,7 +13,7 @@ export class RegisterClientUseCase extends Register {
   }
   public async register(): Promise<void> {
     console.log("Cadastrando client bip...bop");
-    const name =  this.input.textInput("Por favor insira nome do cliente ");
+    const name = this.input.textInput("Por favor insira nome do cliente ");
     const socialName = this.input.textInput(
       "Por favor insira nome social do client ",
     );
@@ -27,13 +27,13 @@ export class RegisterClientUseCase extends Register {
     const month = new Number(date[1].valueOf()).valueOf();
     const day = new Number(date[0].valueOf()).valueOf();
     const emissionDate = new Date(year, month, day);
-    const cpf =  new Cpf({ value: "ola", emissionDate: emissionDate });
+    const cpf = new Cpf({ value: value, emissionDate: emissionDate });
     const newClient = new Client({
       nome: name,
       nomeSocial: socialName,
       cpf: cpf,
     });
     this._clients.push(newClient);
-    console.log(this._clients);
+    console.log(newClient)
   }
 }

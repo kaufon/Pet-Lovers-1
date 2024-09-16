@@ -6,8 +6,8 @@ export  class Cellphone {
   private _ddd: string;
   private _number: string;
   constructor(props: CellPhoneProps) {
-    props.ddd = this._ddd;
-    props.number = this._number;
+    this._ddd = props.ddd
+    this._number = props.ddd
   }
   public get getDDD(): string {
     return this._ddd;

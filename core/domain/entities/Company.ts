@@ -12,9 +12,9 @@ export class Company {
   private _products: Product[];
   private _services: Service[];
   constructor(props:CompanyProps){
-    props._services = this._services
-    props._clients = this._clients
-    props._products = this._products
+    this._services = props._services
+    this._products = props._products
+    this._clients = props._clients
   }
   public get getClients(): Client[]{
     return this._clients
