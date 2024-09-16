@@ -34,6 +34,5 @@ export class RegisterClientUseCase extends Register {
       cpf: cpf,
     });
     this._clients.push(newClient);
-    console.log(newClient)
   }
 }

@@ -1,3 +1,4 @@
+import { Entity } from "../abstracts/Entity";
 import { Cellphone } from "./Cellphone";
 import { Cpf } from "./Cpf";
 import { Pets } from "./Pet";
@@ -16,7 +17,7 @@ type ClientProps = {
   consumedServices?: Service[];
   pets?: Pets[];
 };
-export class Client {
+export class Client extends Entity<ClientProps> {
   public nome: string;
   public nomeSocial: string;
   private _cpf: Cpf;
@@ -26,7 +27,8 @@ export class Client {
   private _consumedProducts: Product[];
   private _consumedServices: Service[];
   private _pets: Pets[];
-  constructor(props: ClientProps) {
+  constructor(props: ClientProps,id?:string) {
+    super(props,id);
     this._cpf = props.cpf
     this.nome = props.nome
     this.nomeSocial = props.nomeSocial
@@ -39,6 +41,10 @@ export class Client {
   }
   public get getCpf(): Cpf {
     return this._cpf;
+  }
+  public get getID(): string | void{
+
+    return this._id
   }
   public get getRgs(): Rg[] {
     return this._rgs;
