@@ -8,7 +8,7 @@ export class deleteClientUseCase  {
     this._clients = clients;
     this.input = input;
   }
-  public async execute(): Promise<void> {
+    public async execute(): Promise<void> {
     console.log("Removendo cliente.... não vá :(");
     const idToBeRemoved = await this.input.textInput(
       "Digite o id para ser removido",
