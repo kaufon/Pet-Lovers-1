@@ -1,5 +1,5 @@
 import {Table} from "console-table-printer"
-import { IOutPut } from "../core/domain/interfaces/Output";
+import { IOutPut } from "../core/interfaces";
 export class OutPut implements IOutPut {
   public lineBreaker(): void {
     return console.log(
