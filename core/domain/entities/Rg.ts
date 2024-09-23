@@ -6,8 +6,8 @@ export class Rg  {
   private value: string
   private emissionDate:Date
   constructor(props:RgProps){
-    props.value = this.value
-    props.emissionDate = this.emissionDate
+    this.value = props.value
+    this.emissionDate = props.emissionDate
   }
   public get getValue():string{
     return this.value

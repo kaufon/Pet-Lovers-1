@@ -1,3 +1,4 @@
+import { Entity } from "../abstracts/Entity";
 import { Cellphone } from "./Cellphone";
 import { Cpf } from "./Cpf";
 import { Pets } from "./Pet";
@@ -16,7 +17,7 @@ type ClientProps = {
   consumedServices?: Service[];
   pets?: Pets[];
 };
-export class Client {
+export class Client extends Entity<ClientProps> {
   public nome: string;
   public nomeSocial: string;
   private _cpf: Cpf;
@@ -26,19 +27,24 @@ export class Client {
   private _consumedProducts: Product[];
   private _consumedServices: Service[];
   private _pets: Pets[];
-  constructor(props: ClientProps) {
-    props.cpf = this._cpf;
-    props.nome = this.nome;
-    props.nomeSocial = this.nomeSocial;
-    props.rgs = this._rgs ?? [];
-    props.registerDate = new Date();
-    props.cellphones = this._cellphones ?? [];
-    props.consumedServices = this._consumedServices ?? [];
-    props.consumedProducts = this._consumedProducts ?? [];
-    props.pets = this._pets ?? [];
+  constructor(props: ClientProps,id?:string) {
+    super(props,id);
+    this._cpf = props.cpf
+    this.nome = props.nome
+    this.nomeSocial = props.nomeSocial
+    this._rgs = props.rgs ?? [];
+    this._registerDate = props.registerDate ?? new Date();
+    this._cellphones = props.cellphones ?? []
+    this._consumedProducts = props.consumedProducts ?? []
+    this._consumedServices = props.consumedServices ?? []
+    this._pets = props.pets ?? []
   }
   public get getCpf(): Cpf {
     return this._cpf;
+  }
+  public get getID(): string | void{
+
+    return this._id
   }
   public get getRgs(): Rg[] {
     return this._rgs;
