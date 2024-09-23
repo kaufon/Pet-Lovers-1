@@ -17,7 +17,7 @@ type ClientProps = {
   consumedServices?: Service[];
   pets?: Pets[];
 };
-export class Client extends Entity<ClientProps> {
+export class Client extends Entity {
   public nome: string;
   public nomeSocial: string;
   private _cpf: Cpf;
@@ -27,8 +27,8 @@ export class Client extends Entity<ClientProps> {
   private _consumedProducts: Product[];
   private _consumedServices: Service[];
   private _pets: Pets[];
-  constructor(props: ClientProps,id?:string) {
-    super(props,id);
+  constructor(props: ClientProps) {
+    super();
     this._cpf = props.cpf
     this.nome = props.nome
     this.nomeSocial = props.nomeSocial
@@ -41,10 +41,6 @@ export class Client extends Entity<ClientProps> {
   }
   public get getCpf(): Cpf {
     return this._cpf;
-  }
-  public get getID(): string | void{
-
-    return this._id
   }
   public get getRgs(): Rg[] {
     return this._rgs;
