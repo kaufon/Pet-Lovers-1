@@ -1,8 +1,9 @@
-export class Entity<T>{
-  protected _id?: string
-  public props:T
-  constructor(props:T , _id?:string){
+export class Entity{
+  protected _id: string
+  constructor( _id?:string){
     this._id = _id ?? crypto.randomUUID()
-    this.props = props
+  }
+  public get getID(): string{
+    return this._id
   }
 }
