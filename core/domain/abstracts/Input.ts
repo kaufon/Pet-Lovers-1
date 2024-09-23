@@ -1,10 +1,15 @@
 import PromptSync from "prompt-sync"
+import inquirer from "inquirer"
 
 export class Input{
   public textInput(message: string):string{
-    let prompt = PromptSync()
-    let value = prompt(message)
-    return value
+    const answer = inquirer.prompt({
+      type: 'input',
+      name: 'value',
+      message: `${message}`
+
+    })
+    return answer.value
   }
   public numberInput(message:string):number{
     let prompt = PromptSync()

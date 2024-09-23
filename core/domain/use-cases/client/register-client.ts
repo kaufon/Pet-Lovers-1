@@ -27,7 +27,7 @@ export class RegisterClientUseCase extends Register {
     const month = new Number(date[1].valueOf()).valueOf();
     const day = new Number(date[0].valueOf()).valueOf();
     const emissionDate = new Date(year, month, day);
-    const cpf =  new Cpf({ value: "ola", emissionDate: emissionDate });
+    const cpf =  new Cpf({ value: value, emissionDate: emissionDate });
     const newClient = new Client({
       nome: name,
       nomeSocial: socialName,
