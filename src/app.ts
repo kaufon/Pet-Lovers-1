@@ -1,7 +1,7 @@
 import { Input } from "./Input";
 import { Company } from "../core/domain/entities";
 import { OutPut } from "./Output";
-import { deleteClientUseCase, listClientUseCase, registerClientUseCase } from "../core/use-cases";
+import { deleteClientUseCase, editClientUseCase, listClientUseCase, registerClientUseCase } from "../core/use-cases";
 export class PetLoversSystem {
   private company: Company;
   private input: Input;
@@ -54,6 +54,10 @@ export class PetLoversSystem {
           this.input,
         );
         return useCase.register();
+      }
+      case "edit":{
+        const useCase = new editClientUseCase(this.company.getClients,this.input)
+        return useCase.execute()
       }
 
       case "list": {

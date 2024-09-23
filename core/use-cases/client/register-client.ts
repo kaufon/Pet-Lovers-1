@@ -35,4 +35,5 @@ export class registerClientUseCase extends Register {
     });
     this._clients.push(newClient);
   }
+
 }
