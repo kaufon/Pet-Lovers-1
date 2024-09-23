@@ -11,10 +11,10 @@ export class Company {
   private _clients: Client[];
   private _products: Product[];
   private _services: Service[];
-  constructor(props:CompanyProps){
-    this._services = props._services
-    this._products = props._products
-    this._clients = props._clients
+  constructor(){
+    this._services = []
+    this._products = []
+    this._clients = []
   }
   public get getClients(): Client[]{
     return this._clients
