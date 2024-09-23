@@ -1,14 +1,15 @@
-import { RegisterClientUseCase } from "../core/domain/use-cases/client/register-client";
 import { Input } from "./Input";
 import { Company } from "../core/domain/entities";
-import { LineBreaker } from "./lineBreaker";
-import { ListClientUseCase } from "../core/domain/use-cases/list/list-client";
+import { OutPut } from "./Output";
+import { deleteClientUseCase, listClientUseCase, registerClientUseCase } from "../core/use-cases";
 export class PetLoversSystem {
   private company: Company;
   private input: Input;
+  private output: OutPut
   constructor() {
     this.company = new Company();
     this.input = new Input();
+    this.output = new OutPut();
   }
   public async run(): Promise<void> {
     console.log("Ola bem vindo ao Pet Lovers!");
@@ -35,7 +36,7 @@ export class PetLoversSystem {
           console.log("Por favor repita não entendi :(");
           break;
       }
-      LineBreaker();
+      this.output.lineBreaker()
     }
   }
   private async clientHandler(): Promise<void> {
@@ -48,7 +49,7 @@ export class PetLoversSystem {
     ]);
     switch (option) {
       case "register": {
-        const useCase = new RegisterClientUseCase(
+        const useCase = new registerClientUseCase(
           this.company.getClients,
           this.input,
         );
@@ -56,9 +57,13 @@ export class PetLoversSystem {
       }
 
       case "list": {
-        const useCase = new ListClientUseCase(this.company.getClients);
+        const useCase = new listClientUseCase(this.company.getClients,this.output);
         return useCase.list();
       }
+
+      case "delete":
+        const useCase = new deleteClientUseCase(this.company.getClients, this.input)
+        return useCase.execute()
       case "back":
         return;
       default:
