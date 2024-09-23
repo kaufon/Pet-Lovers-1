@@ -1,6 +1,7 @@
 import inquirer from "inquirer";
+import { IInput } from "../core/domain/interfaces/Input";
 
-export class Input {
+export class Input implements IInput{
   public async textInput(message: string): Promise<string> {
     const answer = await inquirer.prompt([
       {
