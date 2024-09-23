@@ -60,4 +60,7 @@ export class Client extends Entity {
   public get getPets(): Pets[] {
     return this._pets;
   }
+  public set setCpf(newCpf: Cpf){
+    this._cpf = newCpf
+  }
 }
