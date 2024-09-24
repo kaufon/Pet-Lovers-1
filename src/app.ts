@@ -1,11 +1,18 @@
 import { Input } from "./Input";
 import { Company } from "../core/domain/entities";
 import { OutPut } from "./Output";
-import { deleteClientUseCase, editClientUseCase, listClientUseCase, registerClientUseCase } from "../core/use-cases";
+import {
+  deleteClientUseCase,
+  deletePetUseCase,
+  editClientUseCase,
+  listClientUseCase,
+  registerClientUseCase,
+  registerPetsUseCase,
+} from "../core/use-cases";
 export class PetLoversSystem {
   private company: Company;
   private input: Input;
-  private output: OutPut
+  private output: OutPut;
   constructor() {
     this.company = new Company();
     this.input = new Input();
@@ -26,7 +33,7 @@ export class PetLoversSystem {
           break;
 
         case "pets":
-          console.log("Oops nao exite :(");
+          await this.petHandler()
           break;
         case "leave":
           console.log("Obrigado por usar!");
@@ -36,7 +43,7 @@ export class PetLoversSystem {
           console.log("Por favor repita não entendi :(");
           break;
       }
-      this.output.lineBreaker()
+      this.output.lineBreaker();
     }
   }
   private async clientHandler(): Promise<void> {
@@ -55,25 +62,59 @@ export class PetLoversSystem {
         );
         return useCase.register();
       }
-      case "edit":{
-        const useCase = new editClientUseCase(this.company.getClients,this.input)
-        return useCase.execute()
+      case "edit": {
+        const useCase = new editClientUseCase(
+          this.company.getClients,
+          this.input,
+        );
+        return useCase.execute();
       }
 
       case "list": {
-        const useCase = new listClientUseCase(this.company.getClients,this.output);
+        const useCase = new listClientUseCase(
+          this.company.getClients,
+          this.output,
+        );
         return useCase.list();
       }
 
       case "delete":
-        const useCase = new deleteClientUseCase(this.company.getClients, this.input)
-        return useCase.execute()
+        const useCase = new deleteClientUseCase(
+          this.company.getClients,
+          this.input,
+        );
+        return useCase.execute();
       case "back":
         return;
       default:
         console.log("Nao entendi :(");
     }
   }
+  private async petHandler(): Promise<void> {
+    let option = await this.input.selectInput("Por favor selecione :)", [
+      ["Cadastrar pet", "register"],
+      ["Listar pet", "list"],
+      ["Editar pet", "edit"],
+      ["Deletar pet", "delete"],
+      ["Voltar", "back"],
+    ]);
+    switch (option) {
+      case "register": {
+        const useCase = new registerPetsUseCase(
+          this.company.getClients,
+          this.input,
+        );
+        return useCase.register()
+      }
+      case "delete":{
+        const useCase = new deletePetUseCase(
+          this.company.getClients,
+          this.input
+        )
+        return useCase.execute()
+      }
+    }
+  }
 }
-const app = new PetLoversSystem()
-app.run()
+const app = new PetLoversSystem();
+app.run();

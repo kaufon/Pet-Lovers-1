@@ -1,6 +1,6 @@
 import { Client } from "../../core/domain/entities";
-import { IInput } from "../../core/interfaces/Input";
-import { registerClientUseCase } from "../../core/use-cases/client/register-client";
+import { IInput } from "../../core/interfaces";
+import { registerClientUseCase } from "../../core/use-cases/client";
 
 describe("registerClientUseCase", () => {
   let mockInput: IInput;
