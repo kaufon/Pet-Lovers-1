@@ -1,15 +1,18 @@
+import { Entity } from "../abstracts"
+
 type PetsProps = {
   _name: string
   _type: string
   _race: string
   _gender: string
 }
-export class Pets {
+export class Pets extends Entity {
   private _name: string
   private _type: string
   private _race: string
   private _gender: string
   constructor(props:PetsProps){
+    super()
     this._name = props._name
     this._type = props._type
     this._race = props._race

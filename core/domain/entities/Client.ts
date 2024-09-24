@@ -63,4 +63,7 @@ export class Client extends Entity {
   public set setCpf(newCpf: Cpf){
     this._cpf = newCpf
   }
+  public addPet(pet:Pets):void{
+    this._pets.push(pet)
+  }
 }
