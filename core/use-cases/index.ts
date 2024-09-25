@@ -1,4 +1,5 @@
 export * from './client'
+export * from './products'
 export * from './services'
 export * from './pets'
 export * from './list'
