@@ -4,17 +4,21 @@ import { OutPut } from "./Output";
 import {
   deleteClientUseCase,
   deletePetUseCase,
+  deleteProductUseCase,
   deleteServiceUseCase,
   editClientUseCase,
   editPetUseCase,
+  editProductUseCase,
   editServiceUseCase,
   listClientUseCase,
   listPetsUseCase,
+  listProductsUseCase,
+  listServiceUseCase,
   registerClientUseCase,
   registerPetsUseCase,
+  registerProductUseCase,
   registerServiceUseCase,
 } from "../core/use-cases";
-import { listServiceUseCase } from "../core/use-cases/list/list-services";
 export class PetLoversSystem {
   private company: Company;
   private input: Input;
@@ -31,6 +35,7 @@ export class PetLoversSystem {
       let option = await this.input.selectInput("Por favor selecione :)", [
         ["Clientes", "clients"],
         ["Pets", "pets"],
+        ["Produtos", "products"],
         ["Serviços", "services"],
         ["Sair", "leave"],
       ]);
@@ -43,8 +48,11 @@ export class PetLoversSystem {
           await this.petHandler();
           break;
         case "services":
-          await this.serviceHandler()
-          break
+          await this.serviceHandler();
+          break;
+        case "products":
+          await this.productHandler();
+          break;
         case "leave":
           console.log("Obrigado por usar!");
           isRunning = false;
@@ -149,28 +157,79 @@ export class PetLoversSystem {
       ["Deletar serviço", "delete"],
       ["Voltar", "back"],
     ]);
-    switch(option){
-      case "register":{
-        const useCase = new registerServiceUseCase(this.company.getServices,this.input) 
-        return useCase.register()
+    switch (option) {
+      case "register": {
+        const useCase = new registerServiceUseCase(
+          this.company.getServices,
+          this.input,
+        );
+        return useCase.register();
       }
-      case "list":{
-        const useCase = new listServiceUseCase(this.company.getServices,this.output)
-        return useCase.list()
+      case "list": {
+        const useCase = new listServiceUseCase(
+          this.company.getServices,
+          this.output,
+        );
+        return useCase.list();
+      }
+      case "edit": {
+        const useCase = new editServiceUseCase(
+          this.company.getServices,
+          this.input,
+        );
+        return useCase.execute();
+      }
+      case "delete": {
+        const useCase = new deleteServiceUseCase(
+          this.company.getServices,
+          this.input,
+        );
+        return useCase.execute();
+      }
+      case "back": {
+        return;
+      }
+      default: {
+        console.log("Não entendi :(");
+      }
+    }
+  }
+  private async productHandler(): Promise<void> {
+    let option = await this.input.selectInput("Por favor selecione :)", [
+      ["Cadastrar produto", "register"],
+      ["Listar produtos", "list"],
+      ["Editar produto", "edit"],
+      ["Deletar produto", "delete"],
+      ["Voltar", "back"],
+    ]);
+    switch (option) {
+      case "register": {
+        const useCase = new registerProductUseCase(
+          this.company.getProducts,
+          this.input,
+        );
+        return useCase.register();
+      }
+      case "list": {
+        const useCase = new listProductsUseCase(
+          this.company.getProducts,
+          this.output,
+        );
+        return useCase.list();
       }
       case "edit":{
-        const useCase = new editServiceUseCase(this.company.getServices,this.input)
+        const useCase = new editProductUseCase(this.company.getProducts,this.input)
         return useCase.execute()
       }
-      case "delete":{
-        const useCase = new deleteServiceUseCase(this.company.getServices,this.input)
-        return useCase.execute()
+      case "delete": {
+        const useCase = new deleteProductUseCase(
+          this.company.getProducts,
+          this.input,
+        );
+        return useCase.execute();
       }
-      case "back":{
-        return
-      }
-      default:{
-        console.log("Não entendi :(")
+      case "back": {
+        return;
       }
     }
   }
