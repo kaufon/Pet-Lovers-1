@@ -14,6 +14,7 @@ import {
   editServiceUseCase,
   listByMostConsumedProductsOrServicecUseCase,
   listByMostConsumedProductsOrServicesQuantity,
+  listByMostExpendedUseCase,
   listClientUseCase,
   listMostConsumedProductsAndServicesByPetRaceUseCase,
   listMostConsumedProductsAndServicesByPetTypeUseCase,
@@ -25,7 +26,6 @@ import {
   registerProductUseCase,
   registerServiceUseCase,
 } from "../core/use-cases";
-import { listByMostExpendedUseCase } from "../core/use-cases/list/list-by-most-spended";
 export class PetLoversSystem {
   private company: Company;
   private input: Input;

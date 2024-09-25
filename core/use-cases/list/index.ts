@@ -1,5 +1,5 @@
 export {listClientUseCase} from "./list-client"
-export {} from './list-by-most-spended'
+export {listByMostExpendedUseCase} from './list-by-most-spended'
 export {listByMostConsumedProductsOrServicecUseCase} from "./list-most-consumed-products-and-services"
 export {listMostConsumedProductsAndServicesByPetRaceUseCase} from './list-most-consumed-services-and-products-by-pet-race'
 export {listMostConsumedProductsAndServicesByPetTypeUseCase} from './list-most-consumed-products-and-services-by-pet-type'
