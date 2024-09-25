@@ -25,6 +25,7 @@ import {
   registerProductUseCase,
   registerServiceUseCase,
 } from "../core/use-cases";
+import { listByMostExpendedUseCase } from "../core/use-cases/list/list-by-most-spended";
 export class PetLoversSystem {
   private company: Company;
   private input: Input;
@@ -307,6 +308,10 @@ export class PetLoversSystem {
       }
       case "most-consumed-pet-type":{
         const useCase = new listMostConsumedProductsAndServicesByPetTypeUseCase(this.company.getClients,this.output,this.input)
+        return useCase.list()
+      }
+      case "most-pay":{
+        const useCase= new listByMostExpendedUseCase(this.company.getClients,this.input,this.output)
         return useCase.list()
       }
       case "most-consumed-pet-race": {

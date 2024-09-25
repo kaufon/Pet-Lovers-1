@@ -16,25 +16,26 @@ export class listByMostConsumedProductsOrServicesQuantity extends List {
       console.log("Nenhum cliente cadastrado");
       return;
     }
-    const orderBy= await this.input.selectInput("Deseja crescente ou decrescente", [
-      ["Crescente", "crescent"],
-      ["Descrescente", "decrescent"],
-    ]);
-    let sortedClients = [...this._clients].sort((a, b) => {
-      const totalConsumptionA =
-        a.getConsumedProducts.length + a.geConsumedServices.length;
-      const totalConsumptionB =
-        b.geConsumedServices.length + b.getConsumedProducts.length;
-      return totalConsumptionB - totalConsumptionA;
-    });
-    if (orderBy == 'crescent') {
-      sortedClients = sortedClients.reverse()
-      
-    }
-    const sortedTable = new listClientUseCase(
-      sortedClients,
-      this._output,
+    const orderBy = await this.input.selectInput(
+      "Deseja crescente ou decrescente",
+      [
+        ["Crescente", "crescent"],
+        ["Descrescente", "decrescent"],
+      ],
     );
+    let sortedClients = [...this._clients]
+      .sort((a, b) => {
+        const totalConsumptionA =
+          a.getConsumedProducts.length + a.geConsumedServices.length;
+        const totalConsumptionB =
+          b.geConsumedServices.length + b.getConsumedProducts.length;
+        return totalConsumptionB - totalConsumptionA;
+      })
+      .slice(0, 10);
+    if (orderBy == "crescent") {
+      sortedClients = sortedClients.reverse();
+    }
+    const sortedTable = new listClientUseCase(sortedClients, this._output);
     sortedTable.list();
   }
 }
