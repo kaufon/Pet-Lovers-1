@@ -14,7 +14,7 @@ export class registerPetsUseCase extends Register {
     console.log("Cadastrando pet ....bop");
 
     const clientID = await this.input.textInput(
-      "Por favor insira do ID do client",
+      "Por favor insira do ID do dono",
     );
 
     const client = this._clients.find((client) => client.getID === clientID);
