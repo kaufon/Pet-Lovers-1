@@ -5,7 +5,9 @@ import {
   deleteClientUseCase,
   deletePetUseCase,
   editClientUseCase,
+  editPetUseCase,
   listClientUseCase,
+  listPetsUseCase,
   registerClientUseCase,
   registerPetsUseCase,
 } from "../core/use-cases";
@@ -33,7 +35,7 @@ export class PetLoversSystem {
           break;
 
         case "pets":
-          await this.petHandler()
+          await this.petHandler();
           break;
         case "leave":
           console.log("Obrigado por usar!");
@@ -104,14 +106,28 @@ export class PetLoversSystem {
           this.company.getClients,
           this.input,
         );
-        return useCase.register()
+        return useCase.register();
       }
-      case "delete":{
+      case "list": {
+        const useCase = new listPetsUseCase(
+          this.company.getClients,
+          this.output,
+        );
+        return useCase.list();
+      }
+      case "edit": {
+        const useCase = new editPetUseCase(this.company.getClients, this.input);
+        return useCase.execute();
+      }
+      case "delete": {
         const useCase = new deletePetUseCase(
           this.company.getClients,
-          this.input
-        )
-        return useCase.execute()
+          this.input,
+        );
+        return useCase.execute();
+      }
+      default: {
+        console.log("Não entedi :(");
       }
     }
   }
