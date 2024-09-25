@@ -26,14 +26,13 @@ export class deletePetUseCase {
       
     }
     const petID = await this.input.textInput("Por favor insira o ID do pet a ser removido")
-    const petToBeRemoved = pets.find((pet) => pet.getID === petID)
-    if (!petToBeRemoved) {
+    const petIndex = pets.findIndex((pet) => pet.getID === petID)
+    if (petIndex === -1) {
       console.log("Pet não encontrado")
       return
       
     }
-    const index = pets.indexOf(petToBeRemoved)
-    pets.splice(index, 1)
+    pets.splice(petIndex, 1)
     console.log("Pet removido com sucesso")
   }
 }
