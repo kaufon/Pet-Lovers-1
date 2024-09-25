@@ -1,4 +1,4 @@
-import { IOutPut } from "../interfaces/Output";
+import { IOutPut } from "../../interfaces";
 
 export abstract class List{
   protected _output: IOutPut
