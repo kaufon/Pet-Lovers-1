@@ -2,11 +2,11 @@ import { Client } from "./Client";
 import { Product } from "./Product";
 import { Service } from "./Service";
 
-type CompanyProps = {
-  _clients: Client[];
-  _products: Product[];
-  _services: Service[];
-};
+// type CompanyProps = {
+//   _clients: Client[];
+//   _products: Product[];
+//   _services: Service[];
+// };
 export class Company {
   private _clients: Client[];
   private _products: Product[];

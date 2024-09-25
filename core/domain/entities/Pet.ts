@@ -31,4 +31,16 @@ export class Pets extends Entity {
   public get getType():string{
     return this._type
   }
+  public set setName(newName:string){
+    this._name = newName
+  }
+  public set setRace(newRace:string){
+    this._race= newRace
+  }
+  public set setGender(newGender:string){
+    this._gender= newGender
+  }
+  public set setType(newType:string){
+    this._type = newType
+  }
 }
