@@ -2,6 +2,8 @@ import { Input } from "./Input";
 import { Company } from "../core/domain/entities";
 import { OutPut } from "./Output";
 import {
+  consumeProductUseCase,
+  consumeServicesUseCase,
   deleteClientUseCase,
   deletePetUseCase,
   deleteProductUseCase,
@@ -10,7 +12,11 @@ import {
   editPetUseCase,
   editProductUseCase,
   editServiceUseCase,
+  listByMostConsumedProductsOrServicecUseCase,
+  listByMostConsumedProductsOrServicesQuantity,
   listClientUseCase,
+  listMostConsumedProductsAndServicesByPetRaceUseCase,
+  listMostConsumedProductsAndServicesByPetTypeUseCase,
   listPetsUseCase,
   listProductsUseCase,
   listServiceUseCase,
@@ -37,6 +43,7 @@ export class PetLoversSystem {
         ["Pets", "pets"],
         ["Produtos", "products"],
         ["Serviços", "services"],
+        ["Listar", "list"],
         ["Sair", "leave"],
       ]);
       switch (option) {
@@ -53,6 +60,11 @@ export class PetLoversSystem {
         case "products":
           await this.productHandler();
           break;
+        case "list": {
+          await this.listHandle();
+          break;
+        }
+
         case "leave":
           console.log("Obrigado por usar!");
           isRunning = false;
@@ -70,6 +82,8 @@ export class PetLoversSystem {
       ["Listar clientes", "list"],
       ["Editar clientes", "edit"],
       ["Deletar clientes", "delete"],
+      ["Consumir produto", "consume-product"],
+      ["Consumir serviço", "consume-service"],
       ["Voltar", "back"],
     ]);
     switch (option) {
@@ -96,12 +110,29 @@ export class PetLoversSystem {
         return useCase.list();
       }
 
-      case "delete":
+      case "delete": {
         const useCase = new deleteClientUseCase(
           this.company.getClients,
           this.input,
         );
         return useCase.execute();
+      }
+      case "consume-service": {
+        const useCase = new consumeServicesUseCase(
+          this.company.getClients,
+          this.input,
+          this.company.getServices,
+        );
+        return useCase.execute();
+      }
+      case "consume-product": {
+        const useCase = new consumeProductUseCase(
+          this.company.getClients,
+          this.company.getProducts,
+          this.input,
+        );
+        return useCase.execute();
+      }
       case "back":
         return;
       default:
@@ -217,9 +248,12 @@ export class PetLoversSystem {
         );
         return useCase.list();
       }
-      case "edit":{
-        const useCase = new editProductUseCase(this.company.getProducts,this.input)
-        return useCase.execute()
+      case "edit": {
+        const useCase = new editProductUseCase(
+          this.company.getProducts,
+          this.input,
+        );
+        return useCase.execute();
       }
       case "delete": {
         const useCase = new deleteProductUseCase(
@@ -230,6 +264,64 @@ export class PetLoversSystem {
       }
       case "back": {
         return;
+      }
+    }
+  }
+  private async listHandle(): Promise<void> {
+    let option = await this.input.selectInput("Por favor selecione :)", [
+      [
+        "Listar 10 clientes que mais consumiram em quantidade",
+        "10-most-consumed",
+      ],
+      [
+        "Listagem dos serviçoes e produts mais consumidos",
+        "services-and-products-consumed",
+      ],
+      [
+        "Listagem dos serviços e produtos mais consumidos por tipo de pet",
+        "most-consumed-pet-type",
+      ],
+      [
+        "Listagem dos serviços e produtos mais consumidos por raça de pet",
+        "most-consumed-pet-race",
+      ],
+      ["Listagem dos 5 clientes que mais gastaram", "most-pay"],
+      ["Voltar", "back"],
+    ]);
+    switch (option) {
+      case "10-most-consumed": {
+        const useCase = new listByMostConsumedProductsOrServicesQuantity(
+          this.company.getClients,
+          this.output,
+          this.input,
+        );
+        return useCase.list();
+      }
+      case "services-and-products-consumed": {
+        const useCase = new listByMostConsumedProductsOrServicecUseCase(
+          this.company.getClients,
+          this.output,
+          this.input,
+        );
+        return useCase.list();
+      }
+      case "most-consumed-pet-type":{
+        const useCase = new listMostConsumedProductsAndServicesByPetTypeUseCase(this.company.getClients,this.output,this.input)
+        return useCase.list()
+      }
+      case "most-consumed-pet-race": {
+        const useCase = new listMostConsumedProductsAndServicesByPetRaceUseCase(
+          this.company.getClients,
+          this.output,
+          this.input,
+        );
+        return useCase.list()
+      }
+      case "back":{
+        return
+      }
+      default:{
+        console.log("Não entendi :(")
       }
     }
   }
