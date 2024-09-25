@@ -1,6 +1,6 @@
+import { Register } from "../../domain/abstracts";
 import { Client, Pets } from "../../domain/entities";
 import { IInput } from "../../interfaces";
-import { Register } from "../register";
 
 export class registerPetsUseCase extends Register {
   private _clients: Client[];
