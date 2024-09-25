@@ -4,13 +4,17 @@ import { OutPut } from "./Output";
 import {
   deleteClientUseCase,
   deletePetUseCase,
+  deleteServiceUseCase,
   editClientUseCase,
   editPetUseCase,
+  editServiceUseCase,
   listClientUseCase,
   listPetsUseCase,
   registerClientUseCase,
   registerPetsUseCase,
+  registerServiceUseCase,
 } from "../core/use-cases";
+import { listServiceUseCase } from "../core/use-cases/list/list-services";
 export class PetLoversSystem {
   private company: Company;
   private input: Input;
@@ -27,6 +31,7 @@ export class PetLoversSystem {
       let option = await this.input.selectInput("Por favor selecione :)", [
         ["Clientes", "clients"],
         ["Pets", "pets"],
+        ["Serviços", "services"],
         ["Sair", "leave"],
       ]);
       switch (option) {
@@ -37,6 +42,9 @@ export class PetLoversSystem {
         case "pets":
           await this.petHandler();
           break;
+        case "services":
+          await this.serviceHandler()
+          break
         case "leave":
           console.log("Obrigado por usar!");
           isRunning = false;
@@ -126,8 +134,43 @@ export class PetLoversSystem {
         );
         return useCase.execute();
       }
+      case "back":
+        return;
       default: {
         console.log("Não entedi :(");
+      }
+    }
+  }
+  private async serviceHandler(): Promise<void> {
+    let option = await this.input.selectInput("Por favor selecione :)", [
+      ["Cadastrar serviço", "register"],
+      ["Listar serviço", "list"],
+      ["Editar serviço", "edit"],
+      ["Deletar serviço", "delete"],
+      ["Voltar", "back"],
+    ]);
+    switch(option){
+      case "register":{
+        const useCase = new registerServiceUseCase(this.company.getServices,this.input) 
+        return useCase.register()
+      }
+      case "list":{
+        const useCase = new listServiceUseCase(this.company.getServices,this.output)
+        return useCase.list()
+      }
+      case "edit":{
+        const useCase = new editServiceUseCase(this.company.getServices,this.input)
+        return useCase.execute()
+      }
+      case "delete":{
+        const useCase = new deleteServiceUseCase(this.company.getServices,this.input)
+        return useCase.execute()
+      }
+      case "back":{
+        return
+      }
+      default:{
+        console.log("Não entendi :(")
       }
     }
   }
