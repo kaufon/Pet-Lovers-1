@@ -66,4 +66,10 @@ export class Client extends Entity {
   public addPet(pet:Pets):void{
     this._pets.push(pet)
   }
+  public set setCellphones(cellphones: Cellphone[]){
+    this._cellphones = cellphones
+  }
+  public set setRgs(rgs: Rg[]){
+    this._rgs = rgs
+  }
 }
