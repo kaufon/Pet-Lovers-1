@@ -1,4 +1,3 @@
-import { PromptModule } from "inquirer";
 import { Service } from "../../domain/entities";
 import { IInput } from "../../interfaces";
 
