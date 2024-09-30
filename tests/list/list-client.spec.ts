@@ -29,7 +29,7 @@ describe("listClientUseCase", () => {
       "Nome Social": "Johny",
       CPF: "123",
       RGs: "",
-      Celulares: "",
+      Celulares:  [],
       "Produtos Consumidos": "",
       "Serviços Consumidos": "",
       Pets: "",
