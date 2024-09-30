@@ -30,7 +30,7 @@ describe("registerClientUseCase", () => {
     expect(newClient.nome).toBe("john doe");
     expect(newClient.nomeSocial).toBe("Johnny");
     expect(newClient.getCpf.getValue).toBe("12345746906");
-    expect(newClient.getCpf.getEmissionDate).toEqual(new Date(1000,1,1));
+    expect(newClient.getCpf.getEmissionDate).toEqual(new Date(1000,0,1));
   });
   it("Should only call input.textinput correct number of times",async ()=>{
     await systemUnderTest.register()
