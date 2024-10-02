@@ -41,10 +41,10 @@ export class editClientUseCase {
     const cellphoneArray = new Array<Cellphone>();
     for (let index = 0; index < updatedCellphones.length; index++) {
       const newPhoneDDD = await this.input.textInput(
-        `Insira o novo ddd do ${index} telefone`,
+        `Insira o novo ddd do ${index+1} telefone`,
       );
       const newPhoneNumber = await this.input.textInput(
-        `Insira o novo numer do ${index} telefone`,
+        `Insira o novo numer do ${index+1} telefone`,
       );
       const cellphone = new Cellphone({
         number: newPhoneNumber,
@@ -56,10 +56,10 @@ export class editClientUseCase {
     const RgArray = new Array<Rg>();
     for (let index = 0; index < updatedRgs.length; index++) {
       const newRgValue = await this.input.textInput(
-        `Insira o novo valor do ${index} rg`,
+        `Insira o novo valor do ${index+1} rg`,
       );
       const dateInput = await this.input.textInput(
-        `Insira a nova data de emissao  do ${index} rg`,
+        `Insira a nova data de emissao  do ${index+1} rg`,
       );
       const newEmissiondate = this.parseCpfDate(dateInput);
       const newRG = new Rg({

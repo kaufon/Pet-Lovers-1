@@ -1,5 +1,5 @@
 import { Register } from "../../domain/abstracts";
-import { Cellphone, Client, Cpf, Rg, Rg } from "../../domain/entities";
+import { Cellphone, Client, Cpf,  Rg } from "../../domain/entities";
 import { IInput } from "../../interfaces/Input";
 
 export class registerClientUseCase extends Register {
